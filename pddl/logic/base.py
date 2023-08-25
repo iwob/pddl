@@ -161,6 +161,21 @@ class Not(UnaryOp):
     SYMBOL = "not"
 
 
+class Intends(UnaryOp):
+    """Intends operator."""
+
+    SYMBOL = "intends"
+
+    def __init__(self, variable, arg: Formula):
+        """
+        Initialize the unary operator.
+
+        :param arg: the argument.
+        """
+        super().__init__(arg)
+        self.variable = variable
+
+
 @cache_hash
 @functools.total_ordering
 class QuantifiedCondition(Formula):
@@ -255,6 +270,7 @@ def is_literal(formula: Formula) -> bool:
     """
     return (
         isinstance(formula, Atomic)
+        or isinstance(formula, Intends)
         or isinstance(formula, Not)
         and isinstance(formula.argument, Atomic)
     )

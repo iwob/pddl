@@ -13,6 +13,7 @@ init:                  LPAR INIT init_el* RPAR
 ?init_el:              literal_name
 literal_name:          atomic_formula_name
             |          LPAR NOT atomic_formula_name RPAR
+            |          LPAR INTENDS NAME literal_name RPAR
 atomic_formula_name:   LPAR predicate NAME* RPAR
                    |   LPAR EQUAL_OP NAME NAME RPAR
 
@@ -59,3 +60,4 @@ GOAL: ":goal"
 %import .common.LPAR -> LPAR
 %import .common.RPAR -> RPAR
 %import .common.TYPE_SEP -> TYPE_SEP
+%import .common.INTENDS -> INTENDS

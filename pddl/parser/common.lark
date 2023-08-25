@@ -12,6 +12,7 @@ NAME: /[a-zA-Z][a-zA-Z0-9-_]*/
             | ADL
             | DERIVED_PREDICATES
             | CONDITIONAL_EFFECTS
+            | OTHER_INTENTIONALITY
 
 COMMENT: /;[^\n]*/
 
@@ -37,6 +38,7 @@ IMPLY: "imply"
 EITHER: "either"
 ONEOF: "oneof"
 EQUAL_OP: "="
+INTENDS: "intends"
 
 // available requirements
 STRIPS: ":strips"
@@ -51,6 +53,7 @@ CONDITIONAL_EFFECTS: ":conditional-effects"
 EXISTENTIAL_PRECONDITIONS: ":existential-preconditions"
 UNIVERSAL_PRECONDITIONS: ":universal-preconditions"
 QUANTIFIED_PRECONDITIONS: ":quantified-preconditions"
+OTHER_INTENTIONALITY: ":intentionality"
 
 // others
 LPAR : "("

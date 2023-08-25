@@ -1,6 +1,7 @@
 start: domain
 
-domain:        LPAR DEFINE domain_def [requirements] [types] [constants] [predicates] structure_def* RPAR
+//domain:        LPAR DEFINE domain_def [requirements] [types] [constants] [predicates] structure_def* RPAR
+domain:        LPAR DEFINE domain_def [requirements] [types] (constants | predicates)* structure_def* RPAR
 domain_def:    LPAR DOMAIN NAME RPAR
 
 requirements:              LPAR REQUIREMENTS require_key+ RPAR
@@ -38,6 +39,7 @@ c_effect:          LPAR FORALL LPAR typed_list_variable RPAR effect RPAR
         |          LPAR ONEOF effect+ RPAR
         |          p_effect
 p_effect:          LPAR NOT atomic_formula_term RPAR
+        |          LPAR INTENDS term p_effect RPAR
         |          atomic_formula_term
 cond_effect:       LPAR AND p_effect* RPAR
            |       p_effect
@@ -91,4 +93,5 @@ type_def:          LPAR EITHER primitive_type+ RPAR
 %import .common.LPAR -> LPAR
 %import .common.RPAR -> RPAR
 %import .common.TYPE_SEP -> TYPE_SEP
+%import .common.INTENDS -> INTENDS
 

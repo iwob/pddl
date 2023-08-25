@@ -39,6 +39,7 @@ class Symbols(Enum):
     GOAL = ":goal"
     IMPLY = "imply"
     INIT = ":init"
+    INTENDS = "intends"
     NOT = "not"
     OBJECT = "object"
     OBJECTS = ":objects"
@@ -71,6 +72,8 @@ class RequirementSymbols(Enum):
     ADL = ":adl"
     DERIVED_PREDICATES = ":derived-predicates"
     NON_DETERMINISTIC = ":non-deterministic"
+    OTHER_INTENTIONALITY = ":intentionality"
+    OTHER_DOMAIN_AXIOMS = ":domain-axioms"  # alternative name for DERIVED_PREDICATES
 
     def strip(self) -> str:
         """Strip the leading colon."""
