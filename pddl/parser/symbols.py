@@ -51,6 +51,10 @@ class Symbols(Enum):
     REQUIREMENTS = ":requirements"
     TYPES = ":types"
     WHEN = "when"
+    AXIOM = ":axiom"
+    VARS = ":vars"
+    CONTEXT = ":context"
+    IMPLIES = ":implies"
 
 
 ALL_SYMBOLS: Set[str] = {v.value for v in Symbols}
@@ -71,6 +75,7 @@ class RequirementSymbols(Enum):
     ADL = ":adl"
     DERIVED_PREDICATES = ":derived-predicates"
     NON_DETERMINISTIC = ":non-deterministic"
+    DOMAIN_AXIOMS = ":domain-axioms"
 
     def strip(self) -> str:
         """Strip the leading colon."""

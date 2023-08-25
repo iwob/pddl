@@ -34,6 +34,7 @@ class Requirements(Enum):
     ADL = RS.ADL.strip()
     DERIVED_PREDICATES = RS.DERIVED_PREDICATES.strip()
     NON_DETERMINISTIC = RS.NON_DETERMINISTIC.strip()
+    DOMAIN_AXIOMS = RS.DOMAIN_AXIOMS.strip()
 
     @classmethod
     def strips_requirements(cls) -> Set["Requirements"]:

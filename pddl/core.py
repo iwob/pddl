@@ -30,6 +30,7 @@ from pddl.helpers.base import assert_, check, ensure, ensure_set
 from pddl.logic.base import And, Formula, is_literal
 from pddl.logic.predicates import DerivedPredicate, Predicate
 from pddl.logic.terms import Constant
+from pddl.logic.axioms import Axiom
 from pddl.requirements import Requirements
 
 
@@ -47,6 +48,7 @@ class Domain:
             Collection[DerivedPredicate]
         ] = None,  # TODO cannot be empty
         actions: Optional[Collection["Action"]] = None,
+        axioms: Optional[Collection["Axiom"]] = None,
     ):
         """
         Initialize a PDDL domain.
@@ -59,6 +61,7 @@ class Domain:
         :param predicates: the predicates.
         :param derived_predicates: the derived predicates.
         :param actions: the actions.
+        :param axioms: the axioms.
         """
         self._name = parse_name(name)
         self._requirements = ensure_set(requirements)
@@ -67,6 +70,7 @@ class Domain:
         self._predicates = ensure_set(predicates)
         self._derived_predicates = ensure_set(derived_predicates)
         self._actions = ensure_set(actions)
+        self._axioms = ensure_set(axioms)
 
         self._check_consistency()
 
@@ -117,6 +121,11 @@ class Domain:
     def actions(self) -> AbstractSet["Action"]:
         """Get the actions."""
         return self._actions
+    
+    @property
+    def axioms(self) -> AbstractSet["Axiom"]:
+        """Get the actions."""
+        return self._axioms
 
     @property
     def types(self) -> Dict[name_type, Optional[name_type]]:
