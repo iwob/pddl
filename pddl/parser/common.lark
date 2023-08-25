@@ -13,6 +13,7 @@ NAME: /[a-zA-Z][a-zA-Z0-9-_]*/
             | DERIVED_PREDICATES
             | CONDITIONAL_EFFECTS
             | DOMAIN_AXIOMS
+            | OTHER_INTENTIONALITY
 
 COMMENT: /;[^\n]*/
 
@@ -42,6 +43,7 @@ IMPLY: "imply"
 EITHER: "either"
 ONEOF: "oneof"
 EQUAL_OP: "="
+INTENDS: "intends"
 
 // available requirements
 STRIPS: ":strips"
@@ -57,6 +59,7 @@ EXISTENTIAL_PRECONDITIONS: ":existential-preconditions"
 UNIVERSAL_PRECONDITIONS: ":universal-preconditions"
 QUANTIFIED_PRECONDITIONS: ":quantified-preconditions"
 DOMAIN_AXIOMS: ":domain-axioms"
+OTHER_INTENTIONALITY: ":intentionality"
 
 // others
 LPAR : "("

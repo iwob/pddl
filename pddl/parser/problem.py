@@ -18,7 +18,7 @@ from lark import Lark, ParseError, Transformer
 
 from pddl.core import Problem
 from pddl.helpers.base import assert_
-from pddl.logic.base import And, Not
+from pddl.logic.base import And, Not, Intends
 from pddl.logic.predicates import EqualTo, Predicate
 from pddl.logic.terms import Constant
 from pddl.parser import PARSERS_DIRECTORY, PROBLEM_GRAMMAR_FILE
@@ -96,6 +96,8 @@ class ProblemTransformer(Transformer):
             return args[0]
         elif args[1] == Symbols.NOT.value:
             return Not(args[2])
+        elif args[1] == Symbols.INTENDS.value:
+            return Intends(args[2], args[3])
         else:
             raise ParseError
 
@@ -111,6 +113,8 @@ class ProblemTransformer(Transformer):
             return Not(args[2])
         elif args[1] == Symbols.AND.value:
             return And(*args[2:-1])
+        elif args[1] == Symbols.INTENDS.value:
+            return Intends(args[2], args[3])
         else:
             raise ParseError
 

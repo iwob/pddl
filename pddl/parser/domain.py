@@ -21,7 +21,7 @@ from pddl.core import Domain
 from pddl.custom_types import name
 from pddl.exceptions import PDDLMissingRequirementError, PDDLParsingError
 from pddl.helpers.base import assert_
-from pddl.logic.base import And, ExistsCondition, ForallCondition, Imply, Not, OneOf, Or
+from pddl.logic.base import And, ExistsCondition, ForallCondition, Imply, Not, OneOf, Or, Intends
 from pddl.logic.effects import AndEffect, Forall, When
 from pddl.logic.predicates import DerivedPredicate, EqualTo, Predicate
 from pddl.logic.terms import Constant, Variable
@@ -170,6 +170,10 @@ class DomainTransformer(Transformer):
             pass
         return Not(args[2])
 
+    def gd_intends(self, args):
+        """Process the 'gd' not rule."""
+        return Intends(args[2])
+
     def gd_and(self, args):
         """Process the 'gd_and' rule."""
         operands = args[2:-1]
@@ -229,6 +233,8 @@ class DomainTransformer(Transformer):
             return self.gd_imply(args)
         elif args[1] in [Symbols.FORALL.value, Symbols.EXISTS.value]:
             return self.gd_quantifiers(args)
+        elif args[1] == Symbols.INTENDS.value:
+            return self.gd_intends(args)
 
     def emptyor_effect(self, args):
         """Process the 'emptyor_effect' rule."""
