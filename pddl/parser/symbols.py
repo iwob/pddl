@@ -77,7 +77,7 @@ class RequirementSymbols(Enum):
     DERIVED_PREDICATES = ":derived-predicates"
     NON_DETERMINISTIC = ":non-deterministic"
     DOMAIN_AXIOMS = ":domain-axioms"
-    OTHER_INTENTIONALITY = ":intentionality"
+    INTENTIONALITY = ":intentionality"
 
     def strip(self) -> str:
         """Strip the leading colon."""

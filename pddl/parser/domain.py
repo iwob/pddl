@@ -16,7 +16,7 @@ from typing import Dict, Optional, Set, Tuple
 
 from lark import Lark, ParseError, Transformer
 
-from pddl.action import Action
+from pddl.action import Action, Agents
 from pddl.core import Domain
 from pddl.custom_types import name
 from pddl.exceptions import PDDLMissingRequirementError, PDDLParsingError
@@ -113,7 +113,7 @@ class DomainTransformer(Transformer):
         # process action body
         _children = args[5].children
         action_body = {
-            _children[i][1:]: _children[i + 1] for i in range(0, len(_children), 2)
+            _children[i][1:]: _children[i + 1] for i in range(0, len(_children), 2) if _children[i] is not None
         }
         return Action(action_name, variables, **action_body)
 
@@ -129,6 +129,14 @@ class DomainTransformer(Transformer):
             var_name: Variable(var_name, tags) for var_name, tags in args[1]
         }
         return list(self._current_parameters_by_name.values())
+
+    def agents_def(self, args):
+        if not ({Requirements.INTENTIONALITY} & self._extended_requirements):
+            raise PDDLMissingRequirementError(Requirements.INTENTIONALITY)
+
+        variables = [str(v) for v in args[1:-1]]
+        return Agents(variables)
+
 
     def axiom_def(self, args):
         """Process the 'action_def' rule."""

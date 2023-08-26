@@ -13,10 +13,12 @@ atomic_formula_skeleton:   LPAR NAME typed_list_variable RPAR
 
 
 ?structure_def:    action_def | derived_predicates | axiom_def
-action_def:        LPAR ACTION NAME PARAMETERS action_parameters action_body_def RPAR
+action_def:        LPAR ACTION NAME PARAMETERS [action_parameters] action_body_def RPAR
 action_parameters: LPAR typed_list_variable RPAR
-?action_body_def:  [PRECONDITION emptyor_pregd] [EFFECT emptyor_effect]
+?action_body_def:  [PRECONDITION emptyor_pregd] [EFFECT emptyor_effect] [AGENTS agents_def]
 derived_predicates: LPAR DERIVED atomic_formula_skeleton gd RPAR
+
+agents_def:       LPAR variable+ RPAR
 
 axiom_def:        LPAR AXIOM VARS axiom_vars axiom_body_def RPAR
 axiom_vars:       LPAR typed_list_variable RPAR
@@ -102,4 +104,5 @@ type_def:          LPAR EITHER primitive_type+ RPAR
 %import .common.RPAR -> RPAR
 %import .common.TYPE_SEP -> TYPE_SEP
 %import .common.INTENDS -> INTENDS
+%import .common.AGENTS -> AGENTS
 

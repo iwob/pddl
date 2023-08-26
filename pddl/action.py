@@ -20,6 +20,13 @@ from pddl.logic.base import Formula
 from pddl.logic.terms import Term
 
 
+class Agents:
+    def __init__(self, variables):
+        self.variables = variables
+
+    def __str__(self):
+        return str(self.variables)
+
 class Action:
     """A class for the PDDL Action."""
 
@@ -29,6 +36,7 @@ class Action:
         parameters: Sequence[Variable],
         precondition: Optional[Formula] = None,
         effect: Optional[Formula] = None,
+        agents: Optional[Agents] = None,
     ):
         """
         Initialize the action.
@@ -42,6 +50,7 @@ class Action:
         self._parameters: Sequence[Variable] = ensure_sequence(parameters)
         self._precondition = precondition
         self._effect = effect
+        self._agents = agents
 
     @property
     def name(self) -> str:
@@ -68,6 +77,11 @@ class Action:
         """Get the effect."""
         return self._effect
 
+    @property
+    def agents(self) -> Optional[Agents]:
+        """Get the effect."""
+        return self._agents
+
     def __str__(self):
         """Get the string."""
         operator_str = "(:action {0}\n".format(self.name)
@@ -76,6 +90,8 @@ class Action:
             operator_str += f"    :precondition {str(self.precondition)}\n"
         if self.effect is not None:
             operator_str += f"    :effect {str(self.effect)}\n"
+        if self.agents is not None:
+            operator_str += f"    :effect {str(self.agents)}\n"
         operator_str += ")"
         return operator_str
 
@@ -87,15 +103,16 @@ class Action:
             and self.parameters == other.parameters
             and self.precondition == other.precondition
             and self.effect == other.effect
+            and self.agents == other.agents
         )
 
     def __hash__(self):
         """Get the hash."""
-        return hash((self.name, self.parameters, self.precondition, self.effect))
+        return hash((self.name, self.parameters, self.precondition, self.effect, self.agents))
 
     def __repr__(self) -> str:
         """Get an unambiguous string representation."""
         return (
             f"{type(self).__name__}({self.name}, parameters={', '.join(map(str, self.parameters))}, "
-            f"precondition={self.precondition}, effect={self.effect})"
+            f"precondition={self.precondition}, effect={self.effect}, agents={self.agents})"
         )

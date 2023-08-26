@@ -15,3 +15,4 @@
 from .helpers import constants, variables
 from .predicates import Predicate
 from .terms import Constant, Variable
+from .base import *
