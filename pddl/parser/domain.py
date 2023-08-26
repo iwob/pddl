@@ -85,7 +85,7 @@ class DomainTransformer(Transformer):
 
     def types(self, args):
         """Parse the 'types' rule."""
-        has_typing_requirement = self._has_requirement(Requirements.TYPING)
+        has_typing_requirement = self._has_requirement(Requirements.TYPING) or self._has_requirement(Requirements.ADL)
         types_definition = args[2]
         have_type_hierarchy = any(types_definition.values())
         if have_type_hierarchy and not has_typing_requirement:
@@ -294,7 +294,7 @@ class DomainTransformer(Transformer):
             return t if isinstance(t, Constant) else self._current_parameters_by_name[t]
 
         if args[1] == Symbols.EQUAL.value:
-            if not bool({Requirements.EQUALITY} & self._extended_requirements):
+            if not bool({Requirements.EQUALITY, Requirements.ADL} & self._extended_requirements):
                 raise PDDLMissingRequirementError(Requirements.EQUALITY)
             left = constant_or_variable(args[2])
             right = constant_or_variable(args[3])

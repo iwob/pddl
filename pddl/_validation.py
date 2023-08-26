@@ -151,7 +151,7 @@ class Types:
 
         # check typing requirement
         supertypes = {t for t in type_dict.values() if t is not None}
-        if len(supertypes) > 0 and Requirements.TYPING not in requirements:
+        if len(supertypes) > 0 and Requirements.TYPING not in requirements and Requirements.ADL not in requirements:
             raise PDDLValidationError(
                 "typing requirement is not specified, but types are used: '"
                 + "', '".join(map(str, sorted(supertypes)))
@@ -193,7 +193,7 @@ class TypeChecker:
     @property
     def has_typing(self) -> bool:
         """Check if the typing requirement is specified."""
-        return Requirements.TYPING in self._requirements
+        return Requirements.TYPING in self._requirements or Requirements.ADL in self._requirements
 
     def _check_typing_requirement(self, type_tags: Collection[name_type]) -> None:
         """Check that the typing requirement is specified."""
