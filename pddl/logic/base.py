@@ -19,6 +19,14 @@ from pddl.helpers.cache_hash import cache_hash
 from pddl.logic.terms import Variable
 from pddl.parser.symbols import Symbols
 
+class Literal:
+    def __init__(self, formula):
+        self.formula = formula
+
+class Step:
+    def __init__(self, name, params):
+        self.name = name
+        self.params = params
 
 @cache_hash
 class Formula:

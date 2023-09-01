@@ -36,6 +36,14 @@ def parse_domain(fn):
     return DomainParser()(dtext)
 
 
+def parse_space(fn):
+    from pddl.parser.space import SpaceParser
+
+    with open(fn, "r") as f:
+        dtext = f.read()
+    return SpaceParser()(dtext)
+
+
 def parse_problem(fn):
     from pddl.parser.problem import ProblemParser
 
