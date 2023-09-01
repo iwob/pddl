@@ -43,9 +43,9 @@ effect:            LPAR AND c_effect* RPAR
 c_effect:          LPAR FORALL LPAR typed_list_variable RPAR effect RPAR
         |          LPAR WHEN gd cond_effect RPAR
         |          LPAR ONEOF effect+ RPAR
+        |          LPAR INTENDS term p_effect RPAR
         |          p_effect
 p_effect:          LPAR NOT atomic_formula_term RPAR
-        |          LPAR INTENDS term p_effect RPAR
         |          atomic_formula_term
 cond_effect:       LPAR AND p_effect* RPAR
            |       p_effect

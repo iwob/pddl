@@ -139,7 +139,7 @@ class DomainTransformer(Transformer):
 
 
     def axiom_def(self, args):
-        """Process the 'action_def' rule."""
+        """Process the 'axiom_def' rule."""
         if not ({Requirements.DOMAIN_AXIOMS} & self._extended_requirements):
             raise PDDLMissingRequirementError(Requirements.DOMAIN_AXIOMS)
 
@@ -177,10 +177,6 @@ class DomainTransformer(Transformer):
             # TODO temporary change; remove
             pass
         return Not(args[2])
-
-    def gd_intends(self, args):
-        """Process the 'gd' not rule."""
-        return Intends(args[2])
 
     def gd_and(self, args):
         """Process the 'gd_and' rule."""
@@ -272,6 +268,8 @@ class DomainTransformer(Transformer):
             if not bool({Requirements.NON_DETERMINISTIC} & self._extended_requirements):
                 raise PDDLMissingRequirementError(Requirements.NON_DETERMINISTIC)
             return OneOf(*args[2:-1])
+        if args[1] == Symbols.INTENDS.value:
+            return Intends(args[2], args[3])
         raise ValueError()
 
     def p_effect(self, args):
