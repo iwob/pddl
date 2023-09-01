@@ -78,7 +78,7 @@ class SpaceTransformer(Transformer):
         return Axiom([], **body)
 
     def literals(self, args):
-        return [Literal(a) for a in args[2:-1]]
+        return [a for a in args[2:-1]]
 
     def literal(self, args):
         if len(args) > 1:  #intends
